@@ -161,4 +161,12 @@ module "gcs_reader" {
   roles         = ["roles/storage.objectViewer"]
   k8s_namespace = "default"
   k8s_sa_name   = "gcs-reader"
+
+  # The Workload Identity pool `PROJECT.svc.id.goog` is provisioned
+  # asynchronously by the cluster when workload_identity_config is set.
+  # Without this explicit dependency, Terraform attempts the WI binding
+  # before the pool exists and fails with 400 "Identity Pool does not
+  # exist" on a clean apply. Race caught by CI on the first real apply,
+  # 2026-08-05.
+  depends_on = [google_container_cluster.main]
 }
