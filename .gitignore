@@ -32,3 +32,6 @@ backend.hcl
 
 # macOS
 .DS_Store
+
+# Lock file MUST be committed - pins provider checksums
+!.terraform.lock.hcl
