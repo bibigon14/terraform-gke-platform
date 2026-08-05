@@ -1,0 +1,2 @@
+project_id = "dstepanov-gke-platform"
+# All other variables have sane defaults - override only if you need to.
